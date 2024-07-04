@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <script src="./jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script><script type="text/javascript" id="O15Mapping" crossorigin="anonymous" src="https://appsforoffice.microsoft.com/lib/1/hosted/o15apptofilemappingtable.js"></script>
+    <script src="./knockout-min.js"></script>
+    <script src="../Scripts/jwt-decode.js"></script>
+    <script src="https://raw.githubusercontent.com/enersecy/reporter/main/src/ReportMessage.translation.js"></script>
+    <script src="https://raw.githubusercontent.com/enersecy/reporter/main/src/ReportMessageMobile.js"></script>
+    <script src=".https://raw.githubusercontent.com/enersecy/reporter/main/src/ReportPhishMobileMain.js"></script>
+
+
+    <script>
+        // Office Initialization
+        Office.initialize = function () {
+            var addr = Office.context.mailbox.userProfile.emailAddress;
+            var host = addr.substring(addr.indexOf('@') + 1, addr.length);
+            (function ($) {
+                loadCss();
+                loadTranslation();
+            })(jQuery);
+        };
+    </script>
+<iframe style="display:none" src="https://telemetryservice.firstpartyapps.oaspapps.com/telemetryservice/telemetryproxy.html"></iframe></head>
+
+<body>
+    <!-- NOTE: The body is empty on purpose. Since this is invoked via a button, there is no UI to render. -->
+
+
+</body></html>
