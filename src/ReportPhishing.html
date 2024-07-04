@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <title></title>
+  <!-- https://ipagave.azurewebsites.net/ReportMessage/jquery-1.9.1.min.js -->
+  <script src="https://raw.githubusercontent.com/enersecy/reporter/main/src/jquery-1.9.1.min.js" type="text/javascript"></script>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+  <!-- https://ipagave.azurewebsites.net/ReportMessage/ReportMessage.translation.js -->
+  <script src="https://raw.githubusercontent.com/enersecy/reporter/main/src/ReportMessage.translation.js"></script>
+  <!-- https://ipagave.azurewebsites.net/ReportMessage/ReportMessage.functionFile.min.js -->
+  <script src="https://raw.githubusercontent.com/enersecy/reporter/main/src/ReportMessage.functionFile.min.js"></script>
+  <!-- https://ipagave.azurewebsites.net/ReportMessage/knockout-min.js -->
+  <script src="https://raw.githubusercontent.com/enersecy/reporter/main/src/knockout-min.js"></script>
+
+  <script>
+    // Office Initialization
+    Office.initialize = function () {
+      var addr = Office.context.mailbox.userProfile.emailAddress;
+      var host = addr.substring(addr.indexOf('@') + 1, addr.length);
+      _Perf[Stage.Begin] = Date.now() + "_" + addr.hashCode() + "_" + host + "_" + Office.context.mailbox.diagnostics.hostName;
+      LoadStrings();
+      cmdPhishing();
+    };
+  </script>
+</head>
+<body>
+    <div style="margin: 10px">
+        Reporting to Microsoft helps protect you from email designed to compromise your security and privacy.
+    </div>
+</body>
+</html>
