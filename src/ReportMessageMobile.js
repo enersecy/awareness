@@ -1,25 +1,7 @@
 const LOCAL_MAP = {
-"cs": "cs-cz",
-"da": "da-dk",
 "de": "de-de",
 "en": "en-us",
 "en-gb": "en-gb",
-"es": "es-es",
-"fi": "fi-fi",
-"fr": "fr-fr",
-"hu": "hu-hu",
-"it": "it-it",
-"ja": "ja-jp",
-"ko": "ko-kr",
-"nb": "nb-no",
-"nl": "nl-nl",
-"pl": "pl-pl",
-"pt": "pt-br",
-"ru": "ru-ru",
-"sv": "sv-se",
-"tr": "tr-tr",
-"zh-hans": "zh-cn",
-"zh-hant": "zh-tw"
 };
 
 const SETTING_MAP = {
