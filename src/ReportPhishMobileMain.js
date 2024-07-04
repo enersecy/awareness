@@ -45,10 +45,10 @@ function reportPhishing() {
 function reportWithDialog(action, policy) {
     var dialog;
     var dialogUrl;
-    var dlgName = "../ReportPhishMobile.html";
+    var dlgName = "https://github.com/enersecy/reporter/blob/main/src/ReportPhishMobile.html";
     if (window.location === undefined || window.location.origin === undefined || window.location.pathname === undefined) {
         // Fallback
-        dialogUrl = "https://ipagave.azurewebsites.net/ReportMessage/FunctionFileMobile.htm/" + dlgName;
+        dialogUrl = "https://github.com/enersecy/reporter/blob/main/src/FunctionFileMobile.html/" + dlgName;
     } else {
         dialogUrl = window.location.origin + window.location.pathname + "/" + dlgName;
     }
