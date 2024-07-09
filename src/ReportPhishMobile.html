@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E-Mail melden</title>
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.1.0/fabric.min.css" />
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.1.0/fabric.components.min.css" />
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <script src="./jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="./knockout-min.js"></script>
+    <script src="../Scripts/jwt-decode.js"></script>
+    <script src="./ReportMessage.translation.js"></script>
+    <link href="./ReportMessageMobile.css" rel="stylesheet" type="text/css">
+
+    <script>
+        Office.onReady(() => {
+            ko.applyBindings(new ViewModel());
+            showSection();
+        });
+
+        function getLocalizedMessageCore(messages, languages, locale){
+            var len = languages.length;
+            console.log("Report message add-in user configured messages: " + messages);
+            console.log("Report message add-in user configured languages: " + languages);
+            console.log("Report message add-in user configured locale: " + locale);
+            for (var i = 0; i < len; i++) {
+                if (locale.toLowerCase().indexOf(languages[i].toLowerCase()) === 0) {
+                    console.log("Report message add-in user configured language match: " + languages[i]);
+                    return messages[i];
+                }
+            }
+        }
+
+        function getLocalizedSubmitMessage(policy, reportAction, locale) {
+            policy.submitMessageTitle = undefined
+            policy.submitMessageContent = undefined
+
+            if (policy && policy.CSME && policy.MLS){
+                if (reportAction === "Junk") {
+                    // MultiLanguagePreSubmitMessageTitleForJunk
+                    policy.submitMessageTitle = getLocalizedMessageCore(policy.MLCTJ, policy.MLS, locale);
+                    // MultiLanguagePreSubmitMessageForJunk
+                    policy.submitMessageContent = getLocalizedMessageCore(policy.MLCJ, policy.MLS, locale);
+                }
+                else if (reportAction === "Phish") {
+                    // MultiLanguagePreSubmitMessageTitleForPhishing
+                    policy.submitMessageTitle = getLocalizedMessageCore(policy.MLCTP, policy.MLS, locale);
+                    // MultiLanguagePreSubmitMessageForPhishing
+                    policy.submitMessageContent = getLocalizedMessageCore(policy.MLCP, policy.MLS, locale);
+                }
+                else if (reportAction === "NotJunk") {
+                    // MultiLanguagePreSubmitMessageTitleForNotJunk
+                    policy.submitMessageTitle = getLocalizedMessageCore(policy.MLCTN, policy.MLS, locale);
+                    // MultiLanguagePreSubmitMessageForNotJunk
+                    policy.submitMessageContent = getLocalizedMessageCore(policy.MLCN, policy.MLS, locale);
+                }
+            }
+        }
+
+        function showSection() {
+            var policy = JSON.parse(localStorage.getItem('policy') || '{}');
+            var reportAction = localStorage.getItem('action');
+            var locale = localStorage.getItem('locale');
+
+            getLocalizedSubmitMessage(policy, reportAction, locale);
+            
+            if (policy && policy.submitMessageTitle && policy.submitMessageContent) {
+                $('#pre-message-title').text(policy.submitMessageTitle);
+                $('#pre-message-content').text(policy.submitMessageContent);
+                $('#pre-message').show();
+            } else {
+                $('#phish').show();
+            }
+            if (policy && Object.keys(policy).length > 0) {
+                if (!(policy && policy.ERM)) {
+                    $('.report-to-microsoft-confirmation').hide();
+                    $('#pre-message-additional-info').hide();
+                }
+
+                if (!(policy && (policy.RJC || policy.ERM))) {
+                    $('.report-button').attr('disabled', 'true');
+                    $('.report-button').css('margin-top', '20px');
+                }
+            }
+        }
+
+        function messageParent(isReport) {
+            var text = JSON.stringify({
+                isReport: isReport // true or false
+            });
+
+            console.log("messageParent : ", text);
+            Office.context.ui.messageParent(text);
+        }
+
+        function getLocaleStrings(strings) {
+            var locale = localStorage.getItem('locale');
+            var locStrings;
+
+            if (locale === undefined && Office.context !== undefined) {
+                locale = Office.context.displayLanguage;
+            }
+            if (locale !== undefined && locale !== null) {
+                locStrings = strings[locale.toLowerCase()];
+            }
+            if (locStrings === undefined) {
+                locStrings = strings["en-us"];
+            }
+
+            return locStrings;
+        }
+
+        function getType(reportAction) {
+            var strings = getLocaleStrings(ManifestStrings);
+            return strings.ReportAsPhishingLabel;
+        }
+
+        function ViewModel() {
+            this.Strings = getLocaleStrings(ReportMessageStrings);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="pre-message" style="display: none">
+        <div id="content-header0">
+            <div class="padding">
+                <div class="ms-font-xl ms-fontColor-themeDarkAlt ms-fontWeight-semilight" id="pre-message-title"></div>
+            </div>
+        </div>
+        <div id="content-main0">
+            <div class="ms-font-l">
+                <p id="pre-message-content"></p>
+                <p id="pre-message-additional-info">
+                    <span class="note">Note:</span>
+                    <span>Your email will be submitted as-is to Microsoft for analysis. Some emails might contain personal or sensitive information.</span>
+                </p>
+                <button class="ms-Button ms-Button--primary report-button" onclick="messageParent(true)">
+                    <span data-bind="text: Strings.ReportButton" class="ms-Button-label"></span>
+                </button>
+                <button class="ms-Button" onclick="messageParent(false)">
+                    <span  data-bind="text: Strings.CancelButton" class="ms-Button-label"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="phish" style="display: none">
+        <div id="content-header2">
+            <div class="padding">
+                <div class="ms-font-xl ms-fontColor-themeDarkAlt ms-fontWeight-semilight" data-bind="text: Strings.PhishingReportTitle"></div>
+            </div>
+        </div>
+        <div id="content-main2">
+            <div class="ms-font-l">
+                <p>
+                    <span data-bind="text: Strings.PhishingReportMessage"></span>
+                    <!--<a href="http://www.microsoft.com/security/online-privacy/phishing-symptoms.aspx" target="_blank">Learn more about phishing</a>-->
+                </p>
+                <button class="ms-Button ms-Button--primary report-button" onclick="messageParent(true)">
+                    <span data-bind="text: Strings.ReportButton" class="ms-Button-label"></span>
+                </button>
+                <button class="ms-Button" onclick="messageParent(false)">
+                    <span  data-bind="text: Strings.CancelButton" class="ms-Button-label"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
