@@ -45,10 +45,10 @@ function reportPhishing() {
 function reportWithDialog(action, policy) {
     var dialog;
     var dialogUrl;
-    var dlgName = "https://github.com/enersecy/reporter/blob/main/src/ReportPhishMobile.html";
+    var dlgName = "https://raw.githubusercontent.com/enersecy/reporter/main/src/ReportPhishMobile.html";
     if (window.location === undefined || window.location.origin === undefined || window.location.pathname === undefined) {
         // Fallback
-        dialogUrl = "https://github.com/enersecy/reporter/blob/main/src/FunctionFileMobile.html/" + dlgName;
+        dialogUrl = "https://raw.githubusercontent.com/enersecy/reporter/main/src/FunctionFileMobile.html/" + dlgName;
     } else {
         dialogUrl = window.location.origin + window.location.pathname + "/" + dlgName;
     }
