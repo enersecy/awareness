@@ -1,0 +1,532 @@
+body {
+  -webkit-text-size-adjust: auto;
+  -webkit-tap-highlight-color: #FFFFFF;
+}
+.back-to-main {
+  display: flex;
+  align-items: center;
+}
+.note {
+  font-weight: bold;
+}
+.mobile {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: auto;
+  background-color: #F8F8F8;
+}
+.mobile-spinner {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(225, 225, 225, 0.4);
+}
+.mobile-spinner-icon {
+  border: 6px solid #f3f3f3;
+  /* Light grey */
+  border-top: 6px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.mobile.ios {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.ios .mobile-report {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: auto;
+  background-color: rgba(153, 153, 153, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.ios .mobile-report-modal {
+  width: 80%;
+  border: 1px solid #E1E1E1;
+  background-color: white;
+  border-radius: 10px;
+}
+.ios .mobile-report-modal-title {
+  padding: 15px 25px 0;
+  text-align: center;
+  font-weight: bold;
+}
+.ios .mobile-report-modal-content {
+  padding: 15px 25px;
+  border-bottom: 1px solid #E1E1E1;
+  overflow: auto;
+  max-height: 200px;
+  white-space: pre-wrap;
+}
+.ios .mobile-report-modal-action {
+  padding: 10px;
+  display: flex;
+  color: #0075DA;
+  justify-content: center;
+  align-items: center;
+}
+.ios .mobile-main {
+  display: none;
+}
+.ios .mobile-main-header {
+  padding-top: 30pt;
+  padding-left: 15px;
+  padding-bottom: 5pt;
+  text-transform: uppercase;
+  color: #666666;
+  font-size: 10pt;
+}
+.ios .mobile-main-body {
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  font-size: 12pt;
+  background-color: white;
+}
+.ios .mobile-main-body-button {
+  display: flex;
+  align-items: center;
+}
+.ios .mobile-main-body-button:last-child .mobile-main-body-button-right {
+  border-bottom: none;
+}
+.ios .mobile-main-body-button-left {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+.ios .mobile-main-body-button-left img {
+  width: 25px;
+}
+.ios .mobile-main-body-button-right {
+  padding: 15px 0;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 2;
+  border-bottom: 1px solid #E1E1E1;
+}
+.ios .mobile-main-body-button-right .ms-Icon {
+  color: #8E8E93;
+}
+.ios .mobile-main-footer {
+  font-size: 12pt;
+  margin-top: 15pt;
+}
+.ios .mobile-main-footer-button {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+}
+.ios .mobile-main-footer-button:last-child {
+  border-top: none;
+}
+.ios .mobile-main-footer-button-help {
+  color: #0075DA;
+}
+.ios .mobile-main-footer-button-cancel {
+  color: #E63237;
+}
+.ios .mobile-confirmation {
+  display: none;
+}
+.ios .mobile-confirmation-back {
+  padding: 15px;
+  background-color: white;
+  color: #0075DA;
+  display: flex;
+  align-items: center;
+}
+.ios .mobile-confirmation-back .ms-Icon {
+  margin-right: 5px;
+}
+.ios .mobile-confirmation-header {
+  padding-top: 30pt;
+  padding-bottom: 5pt;
+  padding-left: 15px;
+  text-transform: uppercase;
+  color: #999999;
+  font-size: 10pt;
+}
+.ios .mobile-confirmation-body {
+  background-color: white;
+}
+.ios .mobile-confirmation-body-description {
+  padding: 15px;
+}
+.ios .mobile-confirmation-body-checkbox {
+  padding: 15px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ios .mobile-confirmation-body-checkbox .ms-Icon--Checkbox {
+  color: #8E8E93;
+}
+.ios .mobile-confirmation-body-checkbox .ms-Icon--CheckboxCompositeReversed {
+  display: none;
+  color: #0075DA;
+}
+.ios .mobile-confirmation-footer {
+  font-size: 12pt;
+  margin-top: 15pt;
+}
+.ios .mobile-confirmation-footer-button {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+}
+.ios .mobile-confirmation-footer-button:last-child {
+  border-top: none;
+}
+.ios .mobile-confirmation-footer-button-resolve {
+  color: #0075DA;
+}
+.ios .mobile-confirmation-footer-button-reject {
+  color: #E63237;
+}
+.ios .mobile-settings {
+  display: none;
+}
+.ios .mobile-settings-back {
+  padding: 15px;
+  background-color: white;
+  color: #0075DA;
+}
+.ios .mobile-settings-back .ms-Icon {
+  margin-right: 5px;
+}
+.ios .mobile-settings-header-title {
+  padding-left: 15px;
+  padding-top: 30pt;
+  padding-bottom: 5pt;
+  text-transform: uppercase;
+  color: #999999;
+  font-size: 10pt;
+}
+.ios .mobile-settings-header-description {
+  background-color: white;
+  padding: 15px;
+}
+.ios .mobile-settings-body-title {
+  padding-left: 15px;
+  padding-top: 30pt;
+  padding-bottom: 5pt;
+  text-transform: uppercase;
+  color: #999999;
+  font-size: 10pt;
+}
+.ios .mobile-settings-body-content {
+  font-size: 12pt;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+}
+.ios .mobile-settings-body-content-radio {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  padding-right: 15px;
+  margin-left: 15px;
+  border-bottom: 1px solid #E1E1E1;
+}
+.ios .mobile-settings-body-content-radio:last-child {
+  border-bottom: none;
+}
+.ios .mobile-settings-body-content-radio .ms-Icon--RadioBtnOn {
+  color: #0075DA;
+}
+.ios .mobile-settings-body-content-radio .ms-Icon--RadioBtnOff {
+  color: #8E8E93;
+}
+.ios .mobile-settings-footer {
+  font-size: 12pt;
+  margin-top: 15pt;
+}
+.ios .mobile-settings-footer-button {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+}
+.ios .mobile-settings-footer-button-resolve {
+  color: #0075DA;
+}
+.ios .mobile-settings-footer-button-reject {
+  color: #E63237;
+}
+.mobile.android {
+  font-family: 'Roboto', sans-serif;
+}
+.android .mobile-report {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: auto;
+  background-color: rgba(153, 153, 153, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.android .mobile-report-modal {
+  width: 80%;
+  border: 1px solid #E1E1E1;
+  background-color: white;
+}
+.android .mobile-report-modal-title {
+  padding: 15px;
+  font-weight: 500;
+}
+.android .mobile-report-modal-content {
+  padding: 5px 15px;
+  overflow: auto;
+  max-height: 200px;
+  white-space: pre-wrap;
+}
+.android .mobile-report-modal-action {
+  font-size: 12pt;
+  padding: 10px 20px;
+  display: flex;
+  color: #0075DA;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: 500;
+}
+.android .mobile-main {
+  display: none;
+}
+.android .mobile-main-header {
+  padding-top: 30pt;
+  padding-left: 16px;
+  padding-bottom: 5pt;
+  color: #999999;
+  font-size: 10pt;
+}
+.android .mobile-main-body {
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  font-size: 12pt;
+  background-color: white;
+}
+.android .mobile-main-body-button {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+.android .mobile-main-body-button:last-child .mobile-main-body-button-right {
+  border-bottom: none;
+}
+.android .mobile-main-body-button-left {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+.android .mobile-main-body-button-left img {
+  width: 24px;
+}
+.android .mobile-main-body-button-right {
+  padding: 16px 0;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 2;
+  border-bottom: 1px solid #E1E1E1;
+}
+.android .mobile-main-body-button-right .ms-Icon {
+  color: #8E8E93;
+}
+.android .mobile-main-footer {
+  font-size: 12pt;
+  margin-top: 15pt;
+}
+.android .mobile-main-footer-button {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+  text-transform: uppercase;
+}
+.android .mobile-main-footer-button:last-child {
+  border-top: none;
+}
+.android .mobile-main-footer-button-help {
+  color: #0075DA;
+}
+.android .mobile-main-footer-button-cancel {
+  color: #E63237;
+}
+.android .mobile-confirmation {
+  display: none;
+}
+.android .mobile-confirmation-back {
+  padding: 16px;
+  background-color: white;
+  color: #0075DA;
+  display: flex;
+  align-items: center;
+}
+.android .mobile-confirmation-back .ms-Icon {
+  margin-right: 5px;
+}
+.android .mobile-confirmation-header {
+  padding-top: 30pt;
+  padding-bottom: 5pt;
+  padding-left: 16px;
+  color: #999999;
+  font-size: 10pt;
+}
+.android .mobile-confirmation-body {
+  background-color: white;
+}
+.android .mobile-confirmation-body-description {
+  padding: 16px;
+}
+.android .mobile-confirmation-body-checkbox {
+  padding: 16px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.android .mobile-confirmation-body-checkbox .ms-Icon--Checkbox {
+  color: #8E8E93;
+}
+.android .mobile-confirmation-body-checkbox .ms-Icon--CheckboxCompositeReversed {
+  display: none;
+  color: #0075DA;
+}
+.android .mobile-confirmation-footer {
+  font-size: 12pt;
+  margin-top: 15pt;
+}
+.android .mobile-confirmation-footer-button {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+  text-transform: uppercase;
+}
+.android .mobile-confirmation-footer-button:last-child {
+  border-top: none;
+}
+.android .mobile-confirmation-footer-button-resolve {
+  color: #0075DA;
+}
+.android .mobile-confirmation-footer-button-reject {
+  color: #E63237;
+}
+.android .mobile-settings {
+  display: none;
+}
+.android .mobile-settings-back {
+  padding: 16px;
+  background-color: white;
+  color: #0075DA;
+  display: flex;
+  align-items: center;
+}
+.android .mobile-settings-back .ms-Icon {
+  margin-right: 5px;
+}
+.android .mobile-settings-header-title {
+  padding-left: 16px;
+  padding-top: 30pt;
+  padding-bottom: 5pt;
+  color: #999999;
+  font-size: 10pt;
+}
+.android .mobile-settings-header-description {
+  background-color: white;
+  padding: 16px;
+}
+.android .mobile-settings-body-title {
+  padding-left: 16px;
+  padding-top: 30pt;
+  padding-bottom: 5pt;
+  color: #999999;
+  font-size: 10pt;
+}
+.android .mobile-settings-body-content {
+  font-size: 12pt;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+}
+.android .mobile-settings-body-content-radio {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  padding-right: 16px;
+  margin-left: 16px;
+  border-bottom: 1px solid #E1E1E1;
+}
+.android .mobile-settings-body-content-radio:last-child {
+  border-bottom: none;
+}
+.android .mobile-settings-body-content-radio .ms-Icon--RadioBtnOn {
+  color: #0075DA;
+}
+.android .mobile-settings-body-content-radio .ms-Icon--RadioBtnOff {
+  color: #8E8E93;
+}
+.android .mobile-settings-footer {
+  font-size: 12pt;
+  margin-top: 15pt;
+}
+.android .mobile-settings-footer-button {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
+  background-color: white;
+  text-transform: uppercase;
+}
+.android .mobile-settings-footer-button-resolve {
+  color: #0075DA;
+}
+.android .mobile-settings-footer-button-reject {
+  color: #E63237;
+}
+/*# sourceMappingURL=ReportMessageMobile.css.map */
